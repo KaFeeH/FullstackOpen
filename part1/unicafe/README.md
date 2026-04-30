@@ -1,18 +1,34 @@
-# React + Vite
+# UniCafe - Feedback App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Practical exercise from **Full Stack Open** Part 1: Introduction to React.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A simple feedback collection app where users can rate their experience as _good_, _neutral_, or _bad_. Displays statistics including:
 
-## React Compiler
+- Total votes (all)
+- Average score ((good - bad) / all)
+- Positive percentage ((good / all) \* 100)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+- **Feedback buttons**: Three options (good / neutral / bad) using React `useState`
+- **Statistics display**: Shows metrics only when feedback is given
+- **Components**:
+  - `Button`: Reusable button with onClick handler
+  - `StatisticsLine`: Table row for each statistic
+  - `Statistics`: Conditionally renders stats table or "No feedback given"
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19.2.5
+- Vite 8.0.10
+- ESLint + Babel + React Compiler
+
+## Usage
+
+```bash
+pnpm install
+pnpm run dev
+```
+
