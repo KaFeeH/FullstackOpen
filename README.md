@@ -7,7 +7,7 @@ each corresponding to a specific section.
 ## My Progress
 
 - [x] Part 0: Fundamentals of web applications
-- [ ] Part 1: Introduction to React
+- [x] Part 1: Introduction to React
 - [ ] Part 2: Communicating with server
 - [ ] Part 3: Programming a server with NodeJS and Express
 - [ ] Part 4: Testing Express servers, user administration
