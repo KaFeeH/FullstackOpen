@@ -1,18 +1,34 @@
-# React + Vite
+# Courseinfo - Course Details App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Practical exercise from **Full Stack Open** Part 2: Introduction to React.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A simple course information app that displays courses with their modules and exercises. Shows:
 
-## React Compiler
+- Course name as header
+- List of parts/modules with exercise count
+- Total exercises per course
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+- **Multiple courses**: Renders multiple courses dynamically
+- **Components**:
+  - `Header`: Course name display
+  - `Total`: Calculates total exercises using array.reduce
+  - `Course`: Combines header, parts, and total
+- **Data structure**: Courses with nested parts array, each with name, exercises, and id
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19.2.5
+- Vite 8.0.10
+- ESLint + Babel + React Compiler
+
+## Usage
+
+```bash
+pnpm install
+pnpm run dev
+```
+
