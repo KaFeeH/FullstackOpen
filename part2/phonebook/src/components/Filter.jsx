@@ -1,8 +1,8 @@
-const Filter = ({ handleFilterChange }) => {
+const Filter = ({ onChange }) => {
   return (
     <div>
       filter shown with
-      <input onChange={(e) => handleFilterChange(e.target.value)} />
+      <input onChange={(e) => onChange(e.target.value)} />
     </div>
   );
 };
