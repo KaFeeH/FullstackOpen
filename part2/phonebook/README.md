@@ -1,6 +1,6 @@
 # Phonebook
 
-Practical exercise from **Full Stack Open** Part 2: Introduction to React.
+Practical exercise from **Full Stack Open** Part 2: Communicating with server.
 
 ## Overview
 
