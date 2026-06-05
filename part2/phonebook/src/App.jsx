@@ -28,6 +28,10 @@ const App = () => {
     setNewNumber("");
   };
 
+  const clearMessage = () => {
+    setMessage({ type: "", text: "" });
+  };
+
   const handlePersonSubmit = (event) => {
     event.preventDefault();
 
@@ -49,13 +53,13 @@ const App = () => {
             );
             clearForm();
           })
-          .catch(() => {
+          .catch((error) => {
             setMessage({
               type: "error",
               text: `Information of ${findPerson.name} has already been removed from server`,
             });
             setTimeout(() => {
-              setMessage({ type: "", text: "" });
+              clearMessage();
             }, 5000);
           });
       }
@@ -72,11 +76,17 @@ const App = () => {
         });
         clearForm();
         setTimeout(() => {
-          setMessage({ type: "", text: "" });
+          clearMessage();
         }, 5000);
       })
       .catch((error) => {
-        alert("Failed to add person:", error.message);
+        setMessage({
+          type: "error",
+          text: `Error adding person: ${error.message}`,
+        });
+        setTimeout(() => {
+          clearMessage();
+        }, 5000);
       });
   };
 
@@ -87,8 +97,14 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter((person) => person.id !== id));
         })
-        .catch((error) => {
-          alert("Failed to delete person:", error.message);
+        .catch(() => {
+          setMessage({
+            type: "error",
+            text: `Information of ${person.name} has already been removed from server`,
+          });
+          setTimeout(() => {
+            clearMessage();
+          }, 5000);
         });
   };
 
