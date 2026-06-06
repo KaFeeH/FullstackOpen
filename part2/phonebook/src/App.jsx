@@ -82,7 +82,7 @@ const App = () => {
       .catch((error) => {
         setMessage({
           type: "error",
-          text: `Error adding person: ${error.message}`,
+          text: `Error adding person: ${error.response.data.error}`,
         });
         setTimeout(() => {
           clearMessage();
