@@ -54,10 +54,17 @@ const App = () => {
             clearForm();
           })
           .catch((error) => {
-            setMessage({
-              type: "error",
-              text: `Information of ${findPerson.name} has already been removed from server`,
-            });
+            if (error.response.status === 404) {
+              setMessage({
+                type: "error",
+                text: `Information of ${findPerson.name} has already been removed from server`,
+              });
+            } else {
+              setMessage({
+                type: "error",
+                text: `Error updating person: ${error.response.data.error}`,
+              });
+            }
             setTimeout(() => {
               clearMessage();
             }, 5000);
@@ -97,11 +104,19 @@ const App = () => {
         .then(() => {
           setPersons(persons.filter((person) => person.id !== id));
         })
-        .catch(() => {
-          setMessage({
-            type: "error",
-            text: `Information of ${person.name} has already been removed from server`,
-          });
+        .catch((error) => {
+          if (error.response.status === 404) {
+            setPersons(persons.filter((p) => p.id !== id));
+            setMessage({
+              type: "error",
+              text: `Information of ${person.name} has already been removed from server`,
+            });
+          } else {
+            setMessage({
+              type: "error",
+              text: `Error deleting person: ${error.response.data.error}`,
+            });
+          }
           setTimeout(() => {
             clearMessage();
           }, 5000);
