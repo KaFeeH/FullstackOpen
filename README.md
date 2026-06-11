@@ -2,14 +2,12 @@
 
 ![Full Stack Open 2026](https://img.shields.io/badge/Full%20Stack%20Open-2026-0052cc) ![Progress](https://img.shields.io/badge/Progress-4%2F13-brightgreen) ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 
-<img src="./FSO_img.svg" align="right" width="90">
+<img src="./FSO_img.svg" align="right" width="85">
 This repository contains my work from the FullStackOpen course at the University of Helsinki in 2026, the solutions are organized into separate folders, each corresponding to a specific section.  
-
-<br>
+ 
+&nbsp;
 
 > FullStackOpen is a free online course that teaches modern web development with JavaScript, covering React, Node.js, TypeScript, GraphQL, React Native, CI/CD, containers, and relational databases through hands-on exercises.
-
-<br clear="right">
 
 ## Getting Started
 
@@ -40,6 +38,7 @@ Refer to each part's README for specific setup instructions.
 - [ ] Part 6: Advanced state management
 - [ ] Part 7: React router, custom hooks, styling app with CSS and webpack
 - [ ] Part 8: GraphQL
+- [ ] Part 9: TypeScript
 - [ ] Part 9: TypeScript
 - [ ] Part 10: React Native
 - [ ] Part 11: CI/CD
