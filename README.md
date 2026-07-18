@@ -14,7 +14,7 @@ This repository contains my work from the FullStackOpen course at the University
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/FullstackOpen.git
+git clone https://github.com/KaFeeH/FullstackOpen.git
 cd FullstackOpen
 ```
 
@@ -53,3 +53,4 @@ Refer to each part's README for specific setup instructions.
 - [Express Documentation](https://expressjs.com)
 - [MongoDB Documentation](https://www.mongodb.com/docs)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs)
+
