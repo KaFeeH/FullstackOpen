@@ -1,3 +1,5 @@
+const logger = require("./logger.js");
+
 const errorHandler = (error, _request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).json({
@@ -11,7 +13,14 @@ const errorHandler = (error, _request, response, next) => {
     });
   }
 
-  next(error);
+  if (response.headersSent) {
+    return next(error);
+  }
+
+  logger.error(error.message);
+  return response.status(500).json({
+    error: "internal server error",
+  });
 };
 
 module.exports = {
