@@ -3,15 +3,21 @@ const {
   totalLikes,
   favoriteBlog,
   mostBlogs,
-  mostLikes
+  mostLikes,
 } = require("../utils/list_helper.js");
-const { listWithOneBlog, listWithManyBlogs } = require("../mocks/blogs.mock.js");
+const {
+  listWithOneBlog,
+  listWithManyBlogs,
+  emptyBlogList,
+} = require("../mocks/blogs.mock.js");
 const { test, describe } = require("node:test");
 const assert = require("node:assert");
 
-test("dummy returns one", () => {
-  const blogs = [];
-  assert.strictEqual(dummy(blogs), 1);
+describe("dummy", () => {
+  test("returns one", () => {
+    const blogs = [];
+    assert.strictEqual(dummy(blogs), 1);
+  });
 });
 
 describe("total likes", () => {
@@ -35,6 +41,15 @@ describe("favorite blog", () => {
       likes: 20,
     });
   });
+
+  test("when the list has a blog, it returns that blog", () => {
+    const result = favoriteBlog(listWithOneBlog);
+    assert.deepStrictEqual(result, {
+      title: "Go To Statement Considered Harmful",
+      author: "Edsger W. Dijkstra",
+      likes: 5,
+    });
+  });
 });
 
 describe("most blogs", () => {
@@ -45,9 +60,19 @@ describe("most blogs", () => {
       blogs: 2,
     });
   });
+
+
 });
 
 describe("most likes", () => {
+  test("returns 0 likes with no author for an empty list", () => {
+    const result = mostLikes(emptyBlogList);
+    assert.deepStrictEqual(result, {
+      author: "",
+      likes: 0,
+    });
+  });
+
   test("returns the author whose blogs have the most likes in total", () => {
     const blogs = [
       { author: "Author A", likes: 11 },

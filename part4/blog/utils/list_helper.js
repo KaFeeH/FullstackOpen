@@ -55,7 +55,7 @@ const mostLikes = (blogs) => {
     likesByAuthor.set(author, count);
   }
 
-  let mostAuthor;
+  let mostAuthor = "";
   let mostCount = 0;
 
   for (const [author, count] of likesByAuthor) {
