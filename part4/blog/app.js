@@ -10,7 +10,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(morgan(":method :url :status - :response-time ms"));
+app.use(
+  morgan(":method :url :status - :response-time ms", {
+    skip: () => process.env.NODE_ENV === "test",
+  }),
+);
 
 app.get("/info", (_request, response) => {
   const date = new Date();
@@ -29,6 +33,4 @@ mongoose
     logger.error(error.message);
   });
 
-module.exports = {
-  app,
-};
+module.exports = app;

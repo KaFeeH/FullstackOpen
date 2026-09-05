@@ -1,4 +1,4 @@
-const { app } = require("./app.js");
+const app = require("./app.js");
 const config = require("./utils/config.js");
 const logger = require("./utils/logger.js");
 
