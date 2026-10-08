@@ -1,11 +1,15 @@
+const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+
 const blogsRouter = require("./controllers/blogs.js");
+const loginRouter = require("./controllers/login.js");
+const usersRouter = require("./controllers/users.js");
 const config = require("./utils/config.js");
 const logger = require("./utils/logger.js");
-const mongoose = require("mongoose");
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const { errorHandler } = require("./utils/middleware.js");
+const { tokenExtractor, errorHandler } = require("./utils/middleware.js");
+
 const app = express();
 
 app.use(express.json());
@@ -18,12 +22,16 @@ app.use(
 
 app.get("/info", (_request, response) => {
   const date = new Date();
-  response.send(`Live ${date.toString()}`);
+  return response.status(200).send(`Live ${date.toString()}`);
 });
 
+app.use(tokenExtractor);
 app.use("/api/blogs", blogsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/login", loginRouter);
 app.use(errorHandler);
 
+mongoose.set("strictQuery", false);
 mongoose
   .connect(config.MONGODB_URI)
   .then(() => {
