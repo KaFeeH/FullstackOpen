@@ -16,6 +16,10 @@ const favoriteBlog = (blogs) => {
     return currFav;
   }, null);
 
+  if (!favorite) {
+    return { title: "", author: "", likes: 0 };
+  }
+
   return {
     title: favorite.title,
     author: favorite.author,
@@ -31,7 +35,7 @@ const mostBlogs = (blogs) => {
     blogsByAuthor.set(author, count);
   }
 
-  let mostAuthor;
+  let mostAuthor = "";
   let mostCount = 0;
 
   for (const [author, count] of blogsByAuthor) {
