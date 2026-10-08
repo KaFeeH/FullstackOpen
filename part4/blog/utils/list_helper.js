@@ -3,17 +3,17 @@ const dummy = (_blogs) => {
 };
 
 const totalLikes = (blogs) => {
-  const total = blogs.reduce((prev, curr) => prev + curr.likes, 0);
+  const total = blogs.reduce((sum, blog) => sum + blog.likes, 0);
   return total;
 };
 
 const favoriteBlog = (blogs) => {
-  const favorite = blogs.reduce((currFav, blog) => {
-    if (!currFav || blog.likes > currFav.likes) {
+  const favorite = blogs.reduce((top, blog) => {
+    if (!top || blog.likes > top.likes) {
       return blog;
     }
 
-    return currFav;
+    return top;
   }, null);
 
   if (!favorite) {
@@ -27,52 +27,37 @@ const favoriteBlog = (blogs) => {
   };
 };
 
-const mostBlogs = (blogs) => {
-  const blogsByAuthor = new Map();
+const topAuthorBy = (blogs, getValue) => {
+  const totalByAuthor = new Map();
 
-  for (const { author } of blogs) {
-    const count = (blogsByAuthor.get(author) ?? 0) + 1;
-    blogsByAuthor.set(author, count);
+  for (const blog of blogs) {
+    const total = (totalByAuthor.get(blog.author) ?? 0) + getValue(blog);
+    totalByAuthor.set(blog.author, total);
   }
 
-  let mostAuthor = "";
-  let mostCount = 0;
+  let topAuthor = "";
+  let topTotal = 0;
 
-  for (const [author, count] of blogsByAuthor) {
-    if (count > mostCount) {
-      mostAuthor = author;
-      mostCount = count;
+  for (const [author, total] of totalByAuthor) {
+    if (total > topTotal) {
+      topAuthor = author;
+      topTotal = total;
     }
   }
 
-  return {
-    author: mostAuthor,
-    blogs: mostCount,
-  };
+  return { author: topAuthor, total: topTotal };
+};
+
+const mostBlogs = (blogs) => {
+  const { author, total } = topAuthorBy(blogs, () => 1);
+
+  return { author, blogs: total };
 };
 
 const mostLikes = (blogs) => {
-  const likesByAuthor = new Map();
+  const { author, total } = topAuthorBy(blogs, (blog) => blog.likes);
 
-  for (const { author, likes } of blogs) {
-    const count = (likesByAuthor.get(author) ?? 0) + likes;
-    likesByAuthor.set(author, count);
-  }
-
-  let mostAuthor = "";
-  let mostCount = 0;
-
-  for (const [author, count] of likesByAuthor) {
-    if (count > mostCount) {
-      mostAuthor = author;
-      mostCount = count;
-    }
-  }
-
-  return {
-    author: mostAuthor,
-    likes: mostCount,
-  };
+  return { author, likes: total };
 };
 
 module.exports = {
