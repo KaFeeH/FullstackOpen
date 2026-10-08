@@ -61,8 +61,15 @@ const listWithManyBlogs = [
 
 const emptyBlogList = [];
 
+const listWithSplitLikes = [
+  { author: "Author A", likes: 11 },
+  { author: "Author A", likes: 10 },
+  { author: "Author B", likes: 20 },
+];
+
 module.exports = {
   emptyBlogList,
   listWithOneBlog,
   listWithManyBlogs,
+  listWithSplitLikes,
 };

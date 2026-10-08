@@ -1,3 +1,6 @@
+const { test, describe } = require("node:test");
+const assert = require("node:assert");
+
 const {
   dummy,
   totalLikes,
@@ -6,81 +9,149 @@ const {
   mostLikes,
 } = require("../utils/list_helper.js");
 const {
+  emptyBlogList,
   listWithOneBlog,
   listWithManyBlogs,
-  emptyBlogList,
+  listWithSplitLikes,
 } = require("../mocks/blogs.mock.js");
-const { test, describe } = require("node:test");
-const assert = require("node:assert");
 
 describe("dummy", () => {
   test("returns one", () => {
-    const blogs = [];
-    assert.strictEqual(dummy(blogs), 1);
+    const blogs = emptyBlogList;
+
+    const result = dummy(blogs);
+
+    assert.strictEqual(result, 1);
   });
 });
 
 describe("total likes", () => {
-  test("when list has only one blog, equals the likes of that", () => {
-    const result = totalLikes(listWithOneBlog);
+  test("returns 0 for an empty list", () => {
+    const blogs = emptyBlogList;
+
+    const result = totalLikes(blogs);
+
+    assert.strictEqual(result, 0);
+  });
+
+  test("returns the likes of the blog for a list with one blog", () => {
+    const blogs = listWithOneBlog;
+
+    const result = totalLikes(blogs);
+
     assert.strictEqual(result, 5);
   });
 
-  test("when list has multiple blogs, equals the total likes", () => {
-    const result = totalLikes(listWithManyBlogs);
+  test("returns the total likes for a list with many blogs", () => {
+    const blogs = listWithManyBlogs;
+
+    const result = totalLikes(blogs);
+
     assert.strictEqual(result, 97);
   });
 });
 
 describe("favorite blog", () => {
-  test("when list has many blogs, returns the blog with the most likes", () => {
-    const result = favoriteBlog(listWithManyBlogs);
+  test("returns an empty blog with 0 likes for an empty list", () => {
+    const blogs = emptyBlogList;
+
+    const result = favoriteBlog(blogs);
+
     assert.deepStrictEqual(result, {
-      title: "Clean Code",
-      author: "Robert C. Martin",
-      likes: 20,
+      title: "",
+      author: "",
+      likes: 0,
     });
   });
 
-  test("when the list has a blog, it returns that blog", () => {
-    const result = favoriteBlog(listWithOneBlog);
+  test("returns that blog for a list with one blog", () => {
+    const blogs = listWithOneBlog;
+
+    const result = favoriteBlog(blogs);
+
     assert.deepStrictEqual(result, {
       title: "Go To Statement Considered Harmful",
       author: "Edsger W. Dijkstra",
       likes: 5,
     });
   });
+
+  test("returns the blog with the most likes for a list with many blogs", () => {
+    const blogs = listWithManyBlogs;
+
+    const result = favoriteBlog(blogs);
+
+    assert.deepStrictEqual(result, {
+      title: "Clean Code",
+      author: "Robert C. Martin",
+      likes: 20,
+    });
+  });
 });
 
 describe("most blogs", () => {
-  test("returns the author with the most blogs", () => {
-    const result = mostBlogs(listWithManyBlogs);
+  test("returns 0 blogs with no author for an empty list", () => {
+    const blogs = emptyBlogList;
+
+    const result = mostBlogs(blogs);
+
+    assert.deepStrictEqual(result, {
+      author: "",
+      blogs: 0,
+    });
+  });
+
+  test("returns the author of that blog for a list with one blog", () => {
+    const blogs = listWithOneBlog;
+
+    const result = mostBlogs(blogs);
+
+    assert.deepStrictEqual(result, {
+      author: "Edsger W. Dijkstra",
+      blogs: 1,
+    });
+  });
+
+  test("returns the author with the most blogs for a list with many blogs", () => {
+    const blogs = listWithManyBlogs;
+
+    const result = mostBlogs(blogs);
+
     assert.deepStrictEqual(result, {
       author: "Eric S. Raymond",
       blogs: 2,
     });
   });
-
-
 });
 
 describe("most likes", () => {
   test("returns 0 likes with no author for an empty list", () => {
-    const result = mostLikes(emptyBlogList);
+    const blogs = emptyBlogList;
+
+    const result = mostLikes(blogs);
+
     assert.deepStrictEqual(result, {
       author: "",
       likes: 0,
     });
   });
 
-  test("returns the author whose blogs have the most likes in total", () => {
-    const blogs = [
-      { author: "Author A", likes: 11 },
-      { author: "Author A", likes: 10 },
-      { author: "Author B", likes: 20 },
-    ];
+  test("returns the author of that blog for a list with one blog", () => {
+    const blogs = listWithOneBlog;
 
     const result = mostLikes(blogs);
+
+    assert.deepStrictEqual(result, {
+      author: "Edsger W. Dijkstra",
+      likes: 5,
+    });
+  });
+
+  test("returns the author with the most likes in total for a list with split likes", () => {
+    const blogs = listWithSplitLikes;
+
+    const result = mostLikes(blogs);
+
     assert.deepStrictEqual(result, {
       author: "Author A",
       likes: 21,
