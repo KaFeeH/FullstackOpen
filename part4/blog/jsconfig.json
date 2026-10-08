@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "module": "CommonJS",
+    "target": "ES2022"
+  },
+  "include": ["**/*.js"],
+  "exclude": ["node_modules", ".pnpm-store", "coverage", "dist"]
+}
